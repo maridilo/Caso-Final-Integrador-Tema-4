@@ -1,5 +1,7 @@
 import ComparadoryContadordeContenido.Analisisdetexto;
 import EditordeTextoInteractivo.Editosdetexto;
+import EditordeTextoInteractivo.NavegacionyListado;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -11,7 +13,7 @@ public class Main {
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                Object[] options = {"Editar texto", "Analizar texto"};
+                Object[] options = {"Editar texto", "Analizar texto","Navegar y listar archivos",};
                 int n = JOptionPane.showOptionDialog(null,
                         "¿Qué te gustaría hacer?",
                         "Editor de Texto Interactivo",
@@ -46,7 +48,17 @@ public class Main {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    }
+                    } else if (n == 2) {
+                    JFrame frame = new JFrame("Navegación y Listado de Documentos");
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setSize(800, 600);
+                    frame.setLayout(new BorderLayout());
+                    Editosdetexto editor = new Editosdetexto();
+                    frame.add(new NavegacionyListado(editor), BorderLayout.CENTER);
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                    frame.setResizable(true);
+                }
                 }
         });
 
@@ -74,6 +86,17 @@ public class Main {
             e.printStackTrace();
         }
         }
-    }
+        public static void mostrarDialogoInicial() {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    // El código del diálogo inicial va aquí...
+                }
+            });
+        }
+
+    // ...
+}
+
+
 
 

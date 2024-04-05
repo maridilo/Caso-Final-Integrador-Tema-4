@@ -7,14 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Files;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
+
 public class Editosdetexto extends JPanel {
     private final JTextArea textArea;
     private final JButton saveButton;
@@ -88,4 +81,13 @@ public class Editosdetexto extends JPanel {
         });
 
     }
+
+    public void abrirArchivo(File file) {
+        try {
+            textArea.setText("");
+            textArea.append(new String(Files.readAllBytes(file.toPath())));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+    }
+}
 }
