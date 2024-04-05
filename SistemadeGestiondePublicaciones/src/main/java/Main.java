@@ -86,15 +86,6 @@ public class Main {
             e.printStackTrace();
         }
         }
-        public static void mostrarDialogoInicial() {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    // El código del diálogo inicial va aquí...
-                }
-            });
-        }
-
-    // ...
 }
 
 

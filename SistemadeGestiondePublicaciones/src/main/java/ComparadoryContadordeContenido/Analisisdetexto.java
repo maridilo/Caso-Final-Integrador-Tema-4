@@ -28,6 +28,15 @@ public class Analisisdetexto extends JPanel {
         }
     }
 
+public void analizarTexto(File file, String[] palabrasExcluidas) {
+        try {
+            Map<String, Integer> wordCount = wordCount(file, palabrasExcluidas);
+            textArea.setText("Conteo de palabras: " + wordCount);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean compararArchivos(File file1, File file2) throws IOException {
         String contenido1 = new String(Files.readAllBytes(file1.toPath()));
         String contenido2 = new String(Files.readAllBytes(file2.toPath()));
