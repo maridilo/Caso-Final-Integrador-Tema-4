@@ -76,6 +76,10 @@ public class Editosdetexto extends JPanel {
         newButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int option = JOptionPane.showConfirmDialog(Editosdetexto.this, "Do you want to save the current file?");
+                if (option == JOptionPane.YES_OPTION) {
+                    saveButton.doClick();
+                }
                 textArea.setText("");
             }
         });

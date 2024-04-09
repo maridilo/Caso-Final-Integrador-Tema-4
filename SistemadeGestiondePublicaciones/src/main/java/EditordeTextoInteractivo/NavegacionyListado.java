@@ -7,9 +7,12 @@ import java.io.File;
 import java.nio.file.Paths;
 
 public class NavegacionyListado extends JPanel {
+    private static final String DOCUMENTOS = "ruta/a/tus/documentos";
     private JList<String> fileList;
     private DefaultListModel<String> listModel;
     private Editosdetexto editor;
+
+
 
     public NavegacionyListado(Editosdetexto editor) {
             this.editor = editor;
@@ -33,7 +36,7 @@ public class NavegacionyListado extends JPanel {
             actualizarListaDeArchivos();
     }
     public void actualizarListaDeArchivos() {
-            File folder = new File("ruta/a/tus/documentos");
+            File folder = new File(DOCUMENTOS );
             File[] files = folder.listFiles();
             listModel.clear();
             for (File file : files) {
