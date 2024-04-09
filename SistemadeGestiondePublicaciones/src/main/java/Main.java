@@ -46,6 +46,11 @@ public class Main {
                         frame.dispose(); // Cierra la ventana actual
                         abrirMenuPrincipal(); // Vuelve al menú principal
                     });
+
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                    frame.setResizable(true);
+
             } else if (n == 1) {
                     // Codigo para abrir el analizador de texto
                     JFrame frame = new JFrame("Analizador de Texto");
