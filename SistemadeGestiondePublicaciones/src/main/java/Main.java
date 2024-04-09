@@ -42,12 +42,8 @@ public class Main {
                     frame.setResizable(true);
                     Analisisdetexto analisis = new Analisisdetexto();
                     File file1 = new File("ruta/al/archivo 1.txt");
-                    try {
-                        Map<String, Integer> wordCount = analisis.wordCount(file1);
-                        System.out.println("Conteo de palabras: " + wordCount);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    File file2 = new File("ruta/al/archivo 2.txt");
+                    analisis.compararArchivos(file1, file2);
                     } else if (n == 2) {
                     JFrame frame = new JFrame("Navegación y Listado de Documentos");
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,12 +61,8 @@ public class Main {
         Analisisdetexto analisis = new Analisisdetexto();
         File file1 = new File("ruta/al/archivo 1.txt");
         File file2 = new File("ruta/al/archivo 2.txt");
-        try {
-            boolean sonIguales = analisis.compararArchivos(file1, file2);
-            System.out.println("Los archivos son iguales: " + sonIguales);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        boolean sonIguales = analisis.compararArchivos(file1, file2);
+        System.out.println("Los archivos son iguales: " + sonIguales);
         File file = new File("ruta/al/archivo.txt");
         try {
             Map<String, Integer> wordCount = analisis.wordCount(file);

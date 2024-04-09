@@ -12,11 +12,18 @@ import java.util.List;
 
 public class Analisisdetexto extends JPanel {
     private final JTextArea textArea;
+    private final JTextArea resultArea;
 
     public Analisisdetexto() {
         setLayout(new BorderLayout());
         textArea = new JTextArea();
         add(new JScrollPane(textArea), BorderLayout.CENTER);
+        resultArea = new JTextArea();
+        resultArea.setEditable(false);
+        add(new JScrollPane(resultArea), BorderLayout.SOUTH);
+        JButton analizarButton = new JButton("Analizar");
+        analizarButton.addActionListener(e -> analizarTexto(new File("ruta/al/archivo 1.txt")));
+        add(analizarButton, BorderLayout.NORTH);
     }
 
     public void analizarTexto(File file) {
@@ -37,7 +44,17 @@ public void analizarTexto(File file, String[] palabrasExcluidas) {
         }
     }
 
-    public boolean compararArchivos(File file1, File file2) throws IOException {
+public boolean compararArchivos(File file1, File file2) {
+        try {
+            boolean sonIguales = compararContenido(file1, file2);
+            textArea.setText("Los archivos son iguales: " + sonIguales);
+            return sonIguales;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public boolean compararContenido(File file1, File file2) throws IOException {
         String contenido1 = new String(Files.readAllBytes(file1.toPath()));
         String contenido2 = new String(Files.readAllBytes(file2.toPath()));
         return contenido1.equals(contenido2);
@@ -64,5 +81,8 @@ public void analizarTexto(File file, String[] palabrasExcluidas) {
             }
         }
         return estadisticas;
+    }
+    private void mostrarResultados(String resultado) {
+        resultArea.setText(resultado);
     }
 }
