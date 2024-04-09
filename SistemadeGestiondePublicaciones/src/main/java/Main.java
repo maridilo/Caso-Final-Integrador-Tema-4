@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.Map;
 
 public class Main {
+    public static void abrirMenuPrincipal() {
+
+    }
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -33,6 +36,16 @@ public class Main {
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(true);
+                Editosdetexto editor = new Editosdetexto();
+                frame.add(editor, BorderLayout.CENTER);
+                    // Agregar el botón de "Volver atrás"
+                    JButton backButton = new JButton("Volver atrás");
+                    editor.getButtonPanel().add(backButton);
+                    backButton.addActionListener(e -> {
+                        // Cerrar la ventana actual y volver al menú principal
+                        frame.dispose(); // Cierra la ventana actual
+                        abrirMenuPrincipal(); // Vuelve al menú principal
+                    });
             } else if (n == 1) {
                     // Codigo para abrir el analizador de texto
                     JFrame frame = new JFrame("Analizador de Texto");
@@ -44,7 +57,6 @@ public class Main {
                     File file1 = new File("ruta/al/archivo 1.txt");
                     File file2 = new File("ruta/al/archivo 2.txt");
                     boolean sonIguales = analisis.compararArchivos(file1, file2);
-                    JOptionPane.showMessageDialog(frame, "Los archivos son iguales: " + sonIguales);
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
                     frame.setResizable(true);

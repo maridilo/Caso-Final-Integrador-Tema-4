@@ -13,12 +13,15 @@ public class Editosdetexto extends JPanel {
     private final JButton saveButton;
     private final JButton openButton;
     private final JButton newButton;
+    private JPanel buttonPanel;
 
     public Editosdetexto() {
         textArea = new JTextArea();
         saveButton = new JButton("Save");
         openButton = new JButton("Open");
         newButton = new JButton("New");
+        buttonPanel = new JPanel();
+
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -86,6 +89,10 @@ public class Editosdetexto extends JPanel {
 
     }
 
+    public JPanel getButtonPanel() {
+        return buttonPanel;
+    }
+
     public void abrirArchivo(File file) {
         try {
             textArea.setText("");
@@ -94,4 +101,5 @@ public class Editosdetexto extends JPanel {
             ex.printStackTrace();
     }
 }
+
 }
