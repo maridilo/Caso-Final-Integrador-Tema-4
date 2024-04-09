@@ -19,14 +19,20 @@ public class Editosdetexto extends JPanel {
     private final JButton saveButton;
     private final JButton openButton;
     private final JButton newButton;
+    private final JButton backButton;
+
+    private JFrame frame;
     private JPanel buttonPanel;
 
     public Editosdetexto() {
+        this.frame = frame;
         textArea = new JTextArea();
         saveButton = new JButton("Save");
         openButton = new JButton("Open");
         newButton = new JButton("New");
-        buttonPanel = new JPanel();
+        backButton = new JButton("Back");
+
+        JPanel buttonPanel = new JPanel();
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.add(saveButton);
@@ -38,6 +44,7 @@ public class Editosdetexto extends JPanel {
         setLayout(new BorderLayout());
         add(new JScrollPane(textArea), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.EAST);
+        add(backButton, BorderLayout.SOUTH);
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
@@ -113,6 +120,13 @@ public class Editosdetexto extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cargarArchivo();
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MenuPrincipal menuPrincipal = new MenuPrincipal();
+                menuPrincipal.abrirEditorDeTexto();
             }
         });
     }
