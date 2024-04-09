@@ -24,6 +24,7 @@ public class Main {
                         options[0]);
 
                 if (n == 0) {
+                    // Codigo para abrir el editor de texto
                 JFrame frame = new JFrame("Editor de Texto Interactivo");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setSize(800, 600);
@@ -33,18 +34,23 @@ public class Main {
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(true);
             } else if (n == 1) {
+                    // Codigo para abrir el analizador de texto
                     JFrame frame = new JFrame("Analizador de Texto");
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setSize(800, 600);
                     frame.setLayout(new BorderLayout());
+                    Analisisdetexto analisis = new Analisisdetexto();
+                    frame.add(analisis, BorderLayout.CENTER);
+                    File file1 = new File("ruta/al/archivo 1.txt");
+                    File file2 = new File("ruta/al/archivo 2.txt");
+                    boolean sonIguales = analisis.compararArchivos(file1, file2);
+                    JOptionPane.showMessageDialog(frame, "Los archivos son iguales: " + sonIguales);
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
                     frame.setResizable(true);
-                    Analisisdetexto analisis = new Analisisdetexto();
-                    File file1 = new File("ruta/al/archivo 1.txt");
-                    File file2 = new File("ruta/al/archivo 2.txt");
                     analisis.compararArchivos(file1, file2);
                     } else if (n == 2) {
+                    // Codigo para abrir el navegador y listado de archivos
                     JFrame frame = new JFrame("Navegación y Listado de Documentos");
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setSize(800, 600);
@@ -58,26 +64,7 @@ public class Main {
                 }
         });
 
-        Analisisdetexto analisis = new Analisisdetexto();
-        File file1 = new File("ruta/al/archivo 1.txt");
-        File file2 = new File("ruta/al/archivo 2.txt");
-        boolean sonIguales = analisis.compararArchivos(file1, file2);
-        System.out.println("Los archivos son iguales: " + sonIguales);
-        File file = new File("ruta/al/archivo.txt");
-        try {
-            Map<String, Integer> wordCount = analisis.wordCount(file);
-            System.out.println("Conteo de palabras: " + wordCount);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String[] palabrasExcluidas = {"a", "de", "el", "la", "los", "las"};
-        try {
-            Map<String, Integer> wordCount = analisis.wordCount(file, palabrasExcluidas);
-            System.out.println("Conteo de palabras excluyendo palabras comunes: " + wordCount);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        }
+    }
 }
 
 

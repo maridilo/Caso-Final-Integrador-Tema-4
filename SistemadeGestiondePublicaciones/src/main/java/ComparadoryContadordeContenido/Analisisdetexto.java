@@ -13,6 +13,8 @@ import java.util.List;
 public class Analisisdetexto extends JPanel {
     private final JTextArea textArea;
     private final JTextArea resultArea;
+    private File file1;
+    private File file2;
 
     public Analisisdetexto() {
         setLayout(new BorderLayout());
@@ -21,9 +23,37 @@ public class Analisisdetexto extends JPanel {
         resultArea = new JTextArea();
         resultArea.setEditable(false);
         add(new JScrollPane(resultArea), BorderLayout.SOUTH);
-        JButton analizarButton = new JButton("Analizar");
-        analizarButton.addActionListener(e -> analizarTexto(new File("ruta/al/archivo 1.txt")));
-        add(analizarButton, BorderLayout.NORTH);
+        JButton compararButton = new JButton("Comparar archivos");
+        compararButton.addActionListener(e -> compararArchivos(file1, file2));
+        add(compararButton, BorderLayout.NORTH);
+    }
+public void setFile1(File file) {
+        this.file1 = file;
+    }
+    public void setFile2(File file) {
+        this.file2 = file;
+    }
+    public void compararArchivos() {
+        if (file1 == null || file2 == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione dos archivos para comparar.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            boolean sonIguales = compararContenido(file1, file2);
+            if (sonIguales) {
+                resultArea.setText("Los archivos son iguales.");
+            } else {
+                resultArea.setText("Los archivos son diferentes.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al comparar archivos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private boolean compararContenido(File file1, File file2) throws IOException {
+        String contenido1 = new String(Files.readAllBytes(file1.toPath()));
+        String contenido2 = new String(Files.readAllBytes(file2.toPath()));
+        return contenido1.equals(contenido2);
     }
 
     public void analizarTexto(File file) {
@@ -53,11 +83,6 @@ public boolean compararArchivos(File file1, File file2) {
             e.printStackTrace();
             return false;
         }
-    }
-    public boolean compararContenido(File file1, File file2) throws IOException {
-        String contenido1 = new String(Files.readAllBytes(file1.toPath()));
-        String contenido2 = new String(Files.readAllBytes(file2.toPath()));
-        return contenido1.equals(contenido2);
     }
 
     public Map<String, Integer> wordCount(File file) throws IOException {
