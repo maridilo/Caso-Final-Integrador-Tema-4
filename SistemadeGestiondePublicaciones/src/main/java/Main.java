@@ -46,7 +46,8 @@ public class Main {
                         frame.dispose(); // Cierra la ventana actual
                         abrirMenuPrincipal(); // Vuelve al menú principal
                     });
-
+                    editor.getButtonPanel().revalidate();
+                    editor.getButtonPanel().repaint();
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
                     frame.setResizable(true);
