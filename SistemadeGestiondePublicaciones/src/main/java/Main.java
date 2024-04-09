@@ -1,5 +1,6 @@
 import ComparadoryContadordeContenido.Analisisdetexto;
 import EditordeTextoInteractivo.Editosdetexto;
+import EditordeTextoInteractivo.MenuPrincipal;
 import EditordeTextoInteractivo.NavegacionyListado;
 
 import javax.swing.*;
@@ -9,12 +10,10 @@ import java.io.IOException;
 import java.util.Map;
 
 public class Main {
-    public static void abrirMenuPrincipal() {
-
-    }
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 Object[] options = {"Editar texto", "Analizar texto","Navegar y listar archivos",};
                 int n = JOptionPane.showOptionDialog(null,
@@ -25,6 +24,7 @@ public class Main {
                         null,
                         options,
                         options[0]);
+                MenuPrincipal menu = new MenuPrincipal();
 
                 if (n == 0) {
                     // Codigo para abrir el editor de texto
@@ -36,21 +36,8 @@ public class Main {
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
                 frame.setResizable(true);
-                Editosdetexto editor = new Editosdetexto();
-                frame.add(editor, BorderLayout.CENTER);
-                    // Agregar el botón de "Volver atrás"
-                    JButton backButton = new JButton("Volver atrás");
-                    editor.getButtonPanel().add(backButton);
-                    backButton.addActionListener(e -> {
-                        // Cerrar la ventana actual y volver al menú principal
-                        frame.dispose(); // Cierra la ventana actual
-                        abrirMenuPrincipal(); // Vuelve al menú principal
-                    });
-                    editor.getButtonPanel().revalidate();
-                    editor.getButtonPanel().repaint();
-                    frame.setVisible(true);
-                    frame.setLocationRelativeTo(null);
-                    frame.setResizable(true);
+                menu.abrirEditorDeTexto();
+                frame.setVisible(true);
 
             } else if (n == 1) {
                     // Codigo para abrir el analizador de texto
@@ -67,6 +54,8 @@ public class Main {
                     frame.setLocationRelativeTo(null);
                     frame.setResizable(true);
                     analisis.compararArchivos(file1, file2);
+                    menu.abrirAnalizadorDeTexto();
+
                     } else if (n == 2) {
                     // Codigo para abrir el navegador y listado de archivos
                     JFrame frame = new JFrame("Navegación y Listado de Documentos");
@@ -80,6 +69,7 @@ public class Main {
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
                     frame.setResizable(true);
+                    menu.abrirNavegadorDeArchivos();
                 }
                 }
         });

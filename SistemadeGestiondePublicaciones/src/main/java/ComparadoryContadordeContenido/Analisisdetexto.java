@@ -24,7 +24,7 @@ public class Analisisdetexto extends JPanel {
         resultArea.setEditable(false);
         add(new JScrollPane(resultArea), BorderLayout.SOUTH);
         JButton compararButton = new JButton("Comparar archivos");
-        compararButton.addActionListener(e -> compararArchivos(file1, file2));
+        compararButton.addActionListener(e -> compararArchivos());
         add(compararButton, BorderLayout.NORTH);
     }
 public void setFile1(File file) {
@@ -34,22 +34,23 @@ public void setFile1(File file) {
         this.file2 = file;
     }
     public void compararArchivos() {
-        if (file1 == null || file2 == null) {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione dos archivos para comparar.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        try {
-            boolean sonIguales = compararContenido(file1, file2);
-            if (sonIguales) {
-                resultArea.setText("Los archivos son iguales.");
-            } else {
-                resultArea.setText("Los archivos son diferentes.");
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Selecciona el primer archivo");
+        int userSelection = fileChooser.showOpenDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File file1 = fileChooser.getSelectedFile();
+
+            fileChooser.setDialogTitle("Selecciona el segundo archivo");
+            userSelection = fileChooser.showOpenDialog(this);
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File file2 = fileChooser.getSelectedFile();
+
+                boolean sonIguales = compararArchivos(file1, file2);
+                JOptionPane.showMessageDialog(this, sonIguales ? "Los archivos son iguales" : "Los archivos son diferentes");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error al comparar archivos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     private boolean compararContenido(File file1, File file2) throws IOException {
         String contenido1 = new String(Files.readAllBytes(file1.toPath()));
         String contenido2 = new String(Files.readAllBytes(file2.toPath()));
