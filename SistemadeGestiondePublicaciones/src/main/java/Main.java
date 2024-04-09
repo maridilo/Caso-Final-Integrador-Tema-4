@@ -56,7 +56,9 @@ public class Main {
                     frame.setSize(800, 600);
                     frame.setLayout(new BorderLayout());
                     Editosdetexto editor = new Editosdetexto();
-                    frame.add(new NavegacionyListado(editor), BorderLayout.CENTER);
+                    NavegacionyListado navegacion = new NavegacionyListado(editor);
+                    navegacion.actualizarListaDeArchivos(); // Actualiza la lista al abrir el navegador
+                    frame.add(navegacion, BorderLayout.CENTER);
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
                     frame.setResizable(true);
