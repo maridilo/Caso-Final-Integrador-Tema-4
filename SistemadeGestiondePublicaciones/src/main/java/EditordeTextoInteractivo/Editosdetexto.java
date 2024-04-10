@@ -34,9 +34,7 @@ public class Editosdetexto extends JPanel {
         newButton = new JButton("New");
         backButton = new JButton("Back");
 
-        JPanel buttonPanel = new JPanel();
-
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -44,6 +42,7 @@ public class Editosdetexto extends JPanel {
             }
         });
 
+        buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.add(saveButton);
         buttonPanel.add(openButton);
@@ -56,13 +55,14 @@ public class Editosdetexto extends JPanel {
         add(buttonPanel, BorderLayout.EAST);
         add(backButton, BorderLayout.SOUTH);
 
-        JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
+                mainFrame.setVisible(true);
             }
         });
+
         add(backButton, BorderLayout.SOUTH);
 
         saveButton.addActionListener(new ActionListener() {
@@ -70,6 +70,7 @@ public class Editosdetexto extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setDialogTitle("Save File");
+                guardarArchivo();
                 int userSelection = fileChooser.showSaveDialog(Editosdetexto.this);
                 if (userSelection == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
@@ -91,6 +92,7 @@ public class Editosdetexto extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setDialogTitle("Open File");
+                cargarArchivo();
                 int userSelection = fileChooser.showOpenDialog(Editosdetexto.this);
                 if (userSelection == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
@@ -110,27 +112,15 @@ public class Editosdetexto extends JPanel {
         newButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int option = JOptionPane.showConfirmDialog(Editosdetexto.this, "Do you want to save the current file?");
+                int option = JOptionPane.showConfirmDialog(Editosdetexto.this, "Quieres guardar el archivo actual?");
                 if (option == JOptionPane.YES_OPTION) {
                     saveButton.doClick();
                 }
                 textArea.setText("");
             }
         });
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                guardarArchivo();
-            }
-        });
-
-        openButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarArchivo();
-            }
-        });
     }
+
 
     private void guardarArchivo() {
         JFileChooser fileChooser = new JFileChooser();

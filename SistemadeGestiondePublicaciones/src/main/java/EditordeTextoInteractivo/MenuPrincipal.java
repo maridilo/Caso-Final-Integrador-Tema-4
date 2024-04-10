@@ -14,6 +14,10 @@ public class MenuPrincipal {
         this.mainFrame = mainFrame;
     }
 
+    public void mostrarMenuPrincipal() {
+        mainFrame.setVisible(true);
+    }
+
     public void abrirEditorDeTexto() {
         Editosdetexto editor = new Editosdetexto(mainFrame, mainFrame);
         new Ventana("Editor de Texto Interactivo", editor);
