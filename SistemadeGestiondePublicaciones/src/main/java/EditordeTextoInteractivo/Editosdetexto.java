@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class Editosdetexto extends JPanel {
@@ -24,7 +26,7 @@ public class Editosdetexto extends JPanel {
     private JFrame frame;
     private JPanel buttonPanel;
 
-    public Editosdetexto() {
+    public Editosdetexto(JFrame frame, JFrame mainFrame) {
         this.frame = frame;
         textArea = new JTextArea();
         saveButton = new JButton("Save");
@@ -33,6 +35,14 @@ public class Editosdetexto extends JPanel {
         backButton = new JButton("Back");
 
         JPanel buttonPanel = new JPanel();
+
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                mainFrame.setVisible(true);
+            }
+        });
 
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.add(saveButton);
@@ -50,8 +60,7 @@ public class Editosdetexto extends JPanel {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MenuPrincipal menuPrincipal = new MenuPrincipal();
-                menuPrincipal.abrirEditorDeTexto();
+                frame.dispose();
             }
         });
         add(backButton, BorderLayout.SOUTH);
@@ -98,7 +107,6 @@ public class Editosdetexto extends JPanel {
         });
 
 
-
         newButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,13 +128,6 @@ public class Editosdetexto extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cargarArchivo();
-            }
-        });
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MenuPrincipal menuPrincipal = new MenuPrincipal();
-                menuPrincipal.abrirEditorDeTexto();
             }
         });
     }

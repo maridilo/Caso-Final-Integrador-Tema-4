@@ -2,6 +2,8 @@ import ComparadoryContadordeContenido.Analisisdetexto;
 import EditordeTextoInteractivo.Editosdetexto;
 import EditordeTextoInteractivo.MenuPrincipal;
 import EditordeTextoInteractivo.NavegacionyListado;
+import EditordeTextoInteractivo.Ventana;
+import EditordeTextoInteractivo.MenuPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,20 +26,21 @@ public class Main {
                         null,
                         options,
                         options[0]);
-                MenuPrincipal menu = new MenuPrincipal();
+
 
                 if (n == 0) {
                     // Codigo para abrir el editor de texto
-                JFrame frame = new JFrame("Editor de Texto Interactivo");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(800, 600);
-                frame.setLayout(new BorderLayout());
-                frame.add(new Editosdetexto(), BorderLayout.CENTER);
-                frame.setVisible(true);
-                frame.setLocationRelativeTo(null);
-                frame.setResizable(true);
+                JFrame mainframe = new JFrame("Editor de Texto Interactivo");
+                MenuPrincipal menu = new MenuPrincipal(mainframe);
+                mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                mainframe.setSize(800, 600);
+                mainframe.setLayout(new BorderLayout());
+                mainframe.add(new Editosdetexto(mainframe, mainframe), BorderLayout.CENTER);
+                mainframe.setVisible(true);
+                mainframe.setLocationRelativeTo(null);
+                mainframe.setResizable(true);
                 menu.abrirEditorDeTexto();
-                frame.setVisible(true);
+                mainframe.setVisible(true);
 
             } else if (n == 1) {
                     // Codigo para abrir el analizador de texto
@@ -54,7 +57,7 @@ public class Main {
                     frame.setLocationRelativeTo(null);
                     frame.setResizable(true);
                     analisis.compararArchivos(file1, file2);
-                    menu.abrirAnalizadorDeTexto();
+
 
                     } else if (n == 2) {
                     // Codigo para abrir el navegador y listado de archivos
@@ -62,14 +65,13 @@ public class Main {
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setSize(800, 600);
                     frame.setLayout(new BorderLayout());
-                    Editosdetexto editor = new Editosdetexto();
+                    Editosdetexto editor = new Editosdetexto(frame, frame);
                     NavegacionyListado navegacion = new NavegacionyListado(editor);
                     navegacion.actualizarListaDeArchivos(); // Actualiza la lista al abrir el navegador
                     frame.add(navegacion, BorderLayout.CENTER);
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
                     frame.setResizable(true);
-                    menu.abrirNavegadorDeArchivos();
                 }
                 }
         });
